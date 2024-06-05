@@ -1,4 +1,4 @@
-﻿namespace Wrench.Settings.Actions.Types
+﻿namespace Wrench.HttpRequest.Settings.Actions.Types
 {
     public enum ActionType
     {

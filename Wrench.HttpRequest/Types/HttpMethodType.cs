@@ -1,4 +1,4 @@
-﻿namespace Wrench.Types
+﻿namespace Wrench.HttpRequest.Types
 {
     public enum HttpMethodType
     {

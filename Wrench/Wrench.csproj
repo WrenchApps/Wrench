@@ -15,8 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handles\" />
-    <Folder Include="Settings\Actions\Rules\" />
+    <ProjectReference Include="..\Wrench.Shared\Wrench.Shared.csproj" />
   </ItemGroup>
 
 </Project>

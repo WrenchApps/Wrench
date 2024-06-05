@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Wrench.Validations
+namespace Wrench.Shared.Validations
 {
     public class ValidateResult
     {

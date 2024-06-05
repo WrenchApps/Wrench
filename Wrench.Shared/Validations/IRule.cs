@@ -1,4 +1,4 @@
-﻿namespace Wrench.Validations
+﻿namespace Wrench.Shared.Validations
 {
     public interface IRule<T> where T : IValidable
     {
