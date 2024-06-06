@@ -1,0 +1,207 @@
+startup:
+  serviceName: "test-stepladder-v2" # add validate to required property
+  serviceVersion: "2.0.1" # add validate to required property
+  enableTelemetry: true
+  otelEndpoint: "http://otel-http.kube.acesso-sdb.aws"
+  prefix: "stepladder"
+  awsSecretEnable: true
+
+  #httpClientAuthentication:
+  #  - id: "api_integration_pix"
+  #    type: clientCredential
+  #    clientId: ""
+  #    clientSecret: ""
+  #    endpointAuth: ""
+  #    valueFrom: declared
+
+  #apiSecurity:
+  #  type: basic
+  #  user: admin
+  #  password: 123456
+  #  valueFrom: declared
+
+  #mapVariables:
+  #  - from: AWS_SECRET_REDIS_CONNECTION_STRING
+  #    to: REDIS_CONNECTION_STRING
+
+
+#  connections:
+#    kafka:
+#      valueFrom:
+#    redis:
+#      valueFrom:
+
+connections:
+  redis:
+    connectionString: "localhost:6379"
+
+entrypoints:
+  routes:
+  - route: "api/customers"
+    method: get
+    #enableAnonymous: true
+    flowActionId: get_customer
+
+  - route: "api/customers/{id}"
+    method: get
+    flowActionId: get_customer_id
+
+  - route: "api/customers"
+    method: post
+    flowActionId: post_customer
+
+  - route: "api/customers/{id}"
+    method: put
+    flowActionId: put_customer_id
+
+  - route: "api/customers/{id}"
+    method: delete
+    flowActionId: delete_customer_id
+  
+#  consumers:
+#    kafka:
+#      - groupId:
+#        topicName:
+#        actionId: {id}
+
+actions:
+  - id: get_customer_action
+    type: httpRequest
+    uri: 'http://localhost:8080/customers'
+    method: get
+    #strategyCacheId: redisCache_22
+    headerMaps:
+      - mapFromTo: "x-correlation-id:x-correlation-id"
+        fromType: httpRequest
+    reponseContractMapId: customer_response
+
+  - id: get_customer_id_action
+    type: httpRequest
+    uri: 'http://localhost:8080/customers/{id}'
+    method: get
+    #strategyCacheId: redisCache_22
+    routeMaps:
+      - routeKey: '{id}'
+        fromType: httpRequest
+    headerMaps:
+      - mapFromTo: "x-correlation-id:x-correlation-id"
+        fromType: httpRequest
+    reponseContractMapId: customer_response
+
+  - id: post_customer_action
+    type: httpRequest
+    uri: 'http://localhost:8080/customers'
+    method: post
+    headerMaps:
+      - mapFromTo: "x-correlation-id:x-correlation-id"
+        fromType: httpRequest
+
+    strategyHttpIdempotencyId: idemp_55
+    requestContractValidationId: customer_post_validation
+    reponseContractMapId: customer_response
+    #autenticationId: 10
+
+  - id: put_customer_id_action
+    type: httpRequest
+    uri: 'http://localhost:8080/customers/{id}'
+    method: put
+    routeMaps:
+      - routeKey: '{id}'
+        fromType: httpRequest
+    reponseContractMapId: customer_response
+  
+  - id: delete_customer_id_action
+    type: httpRequest
+    uri: 'http://localhost:8080/customers/{id}'
+    method: delete
+    routeMaps:
+      - routeKey: '{id}'
+        fromType: httpRequest
+    reponseContractMapId: customer_response
+
+#  - id: 2
+#    type: kafkaConsumer
+#    topicName: 'stepladder.test.request'
+#    groupId: ''
+
+flowActions:
+  - id: get_customer
+    actionsId:
+      - get_customer_action
+
+  - id: get_customer_id
+    actionsId:
+      - get_customer_id_action
+
+  - id: post_customer
+    actionsId:
+      - post_customer_action
+  
+  - id: put_customer_id
+    actionsId:
+      - put_customer_id_action
+
+  - id: delete_customer_id
+    actionsId:
+      - delete_customer_id_action
+
+contractMaps:
+  - id: customer_response
+    mapFromTo:
+      - "name:person.Name"
+      - "motherName:person.motherName"
+      - "birthdate:person.birthdate"
+    remove:
+      - addresses
+    mapArray:
+      - arrayMapFromTo: "addresses:person.addresses"
+        mapFromTo:
+          - "street:rua"
+          - "number:numero"
+          - "neighborhood:bairro"
+
+strategies:
+  caches:
+    - id: redisCache_22
+      providerType: redis
+      ttl: 120 #seconds default is 300 seconds
+
+  httpIdempotencies:
+    - id: idemp_55
+      ttl: 60 # default value is 300 seconds
+      providerType: redis
+      mapHeaderProperties:
+        - "x-http-idempotency"
+
+contractValidations:
+  - id: customer_post_validation
+    properties:
+    - propertyName: "name"
+      validationType: Required
+      valueType: string
+
+    - propertyName: "name"
+      validationType: biggerThan
+      valueType: string
+      length: 5
+
+    - propertyName: "motherName"
+      validationType: Required
+      valueType: string
+      
+    - propertyName: "motherName"
+      validationType: biggerThan
+      valueType: string
+      length: 10
+
+    validationArrayObjects:
+    - arrayPropertyName: "contacts"
+      properties:
+      - propertyName: "type"
+        valueType: int
+        validationType: required
+      - propertyName: "value"
+        valueType: string
+        validationType: biggerThan
+        length: 9
+      
