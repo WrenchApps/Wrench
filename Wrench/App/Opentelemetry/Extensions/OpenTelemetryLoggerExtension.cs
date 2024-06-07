@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using Opentelemetry.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using Opentelemetry.Configuration;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
