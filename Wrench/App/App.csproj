@@ -10,13 +10,13 @@
 	<ItemGroup>
 
 		<PackageReference Include="Kralizek.Extensions.Configuration.AWSSecretsManager" Version="1.7.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.0.0-rc9.7" />
 		<PackageReference Include="RedLock.net" Version="2.3.2" />
-		<PackageReference Include="StackExchange.Redis" Version="2.6.96" />
-		<PackageReference Include="YamlDotNet" Version="13.0.2" />
+		<PackageReference Include="StackExchange.Redis" Version="2.7.33" />
+		<PackageReference Include="YamlDotNet" Version="15.1.6" />
 
-		<PackageReference Include="OpenTelemetry" Version="1.4.0-beta.2" />
+		<!--<PackageReference Include="OpenTelemetry" Version="1.4.0-beta.2" />
 		<PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.4.0-alpha.1" />
 		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.4.0-alpha.1" />
 		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol.Logs" Version="1.4.0-alpha.1" />
@@ -24,7 +24,7 @@
 		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.5" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.5" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Process" Version="1.0.0-alpha.3" />
-		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.0.0" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.0.0" />-->
 	</ItemGroup>
 
 </Project>
