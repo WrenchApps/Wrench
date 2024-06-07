@@ -1,0 +1,28 @@
+name: build feature wrench
+on: 
+  push:
+    branches:
+      - "feature/*"
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest    
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      
+      - name: Restore solution
+        run: dotnet restore "./Wrench/App/App.csproj" 
+     
+      - name: Build solution
+        run: dotnet build "./Wrench/App/App.csproj"
+
+      - name: Run tests
+        run: dotnet test "./Wrench/Test/Test.csproj" -c Information --no-build --no-restore
