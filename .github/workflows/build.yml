@@ -22,10 +22,10 @@ jobs:
         run: ls Wrench
      
       - name: Build solution
-        run: dotnet build "./Wrench/App.csproj" -c Debug -o /app/build
+        run: dotnet build "./Wrench/App/App.csproj" -c Debug -o /app/build
 
       - name: Run tests
-        run: dotnet test -c Debug --no-build --no-restore
+        run: dotnet test "./Wrench/Test/Test.csproj" -c Debug --no-build --no-restore
 
 
   # build-and-publish-docker:
