@@ -22,7 +22,7 @@ jobs:
         run: dotnet restore "./Wrench/App/App.csproj" 
      
       - name: Build solution
-        run: dotnet build "./Wrench/App/App.csproj" -c Information -o /app/build
+        run: dotnet build "./Wrench/App/App.csproj"
 
       - name: Run tests
         run: dotnet test "./Wrench/Test/Test.csproj" -c Information --no-build --no-restore
