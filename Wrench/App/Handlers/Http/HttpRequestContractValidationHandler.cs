@@ -9,7 +9,7 @@ namespace App.Handlers.Http
 {
     public class HttpRequestContractValidationHandler : Handler
     {
-        public override async Task DoAsync(StepladderHttpContext context)
+        public override async Task DoAsync(WrenchHttpContext context)
         {
             if (ContractValidation != null)
             {

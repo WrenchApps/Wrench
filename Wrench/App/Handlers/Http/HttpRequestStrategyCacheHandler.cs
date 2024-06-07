@@ -9,7 +9,7 @@ namespace App.Handlers.Http
     {
         private string _cachePrefix = $"{ApplicationSetting.Current.Startup.ServiceName}:{ApplicationSetting.Current.Startup.ServiceVersion}:Cache";
 
-        public override async Task DoAsync(StepladderHttpContext context)
+        public override async Task DoAsync(WrenchHttpContext context)
         {
             if (context.HasNoErrorProcessor)
             {

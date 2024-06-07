@@ -8,7 +8,7 @@ namespace App.Handlers.Http
 {
     public class HttpResponseContractMapHandler : Handler
     {
-        public override async Task DoAsync(StepladderHttpContext context)
+        public override async Task DoAsync(WrenchHttpContext context)
         {
             if (context.HasCache == false &&
                 context.HasNoErrorProcessor &&

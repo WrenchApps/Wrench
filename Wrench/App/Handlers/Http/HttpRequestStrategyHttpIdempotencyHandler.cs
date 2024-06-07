@@ -14,7 +14,7 @@ namespace App.Handlers.Http
         private static TimeSpan WAIT = TimeSpan.FromSeconds(10);
         private static TimeSpan RETRY = TimeSpan.FromMilliseconds(100);
 
-        public override async Task DoAsync(StepladderHttpContext context)
+        public override async Task DoAsync(WrenchHttpContext context)
         {
             if (context.HasNoErrorProcessor)
             {
@@ -52,7 +52,7 @@ namespace App.Handlers.Http
                 await NextAsync(context);
         }
 
-        private void SetErrorProcessor(StepladderHttpContext context)
+        private void SetErrorProcessor(WrenchHttpContext context)
         {
             context.SetHttpProcessorWithError();
             context.ResponseContext.ResponseStatusCode = 503;

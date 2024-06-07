@@ -5,7 +5,7 @@ namespace App.Handlers.Http
 {
     public static class HandlerChainBuilder
     {
-        public static Handler ChainBuilder(StepladderHttpContext context)
+        public static Handler ChainBuilder(WrenchHttpContext context)
         {
             var routeSetting = context.RouteSetting;
 

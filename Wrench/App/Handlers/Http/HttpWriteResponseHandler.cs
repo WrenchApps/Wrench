@@ -4,7 +4,7 @@ namespace App.Handlers.Http
 {
     public class HttpWriteResponseHandler : Handler
     {
-        public override async Task DoAsync(StepladderHttpContext context)
+        public override async Task DoAsync(WrenchHttpContext context)
         {
             context.HttpContext.Response.Headers.Add("Content-Type", context.ResponseContext.ResponseContentType);
 

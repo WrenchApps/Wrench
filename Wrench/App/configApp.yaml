@@ -1,9 +1,8 @@
 startup:
-  serviceName: "test-stepladder-v2" # add validate to required property
+  serviceName: "wrench" # add validate to required property
   serviceVersion: "2.0.1" # add validate to required property
-  enableTelemetry: true
-  otelEndpoint: "http://otel-http.kube.acesso-sdb.aws"
-  prefix: "stepladder"
+  enableTelemetry: false
+  prefix: "wrench"
   awsSecretEnable: true
 
   #httpClientAuthentication:
@@ -31,9 +30,9 @@ startup:
 #    redis:
 #      valueFrom:
 
-connections:
-  redis:
-    connectionString: "localhost:6379"
+# connections:
+#   redis:
+#     connectionString: "localhost:6379"
 
 entrypoints:
   routes:
@@ -121,7 +120,7 @@ actions:
 
 #  - id: 2
 #    type: kafkaConsumer
-#    topicName: 'stepladder.test.request'
+#    topicName: 'wrench.test.request'
 #    groupId: ''
 
 flowActions:
@@ -160,18 +159,18 @@ contractMaps:
           - "number:numero"
           - "neighborhood:bairro"
 
-strategies:
-  caches:
-    - id: redisCache_22
-      providerType: redis
-      ttl: 120 #seconds default is 300 seconds
+# strategies:
+#   caches:
+#     - id: redisCache_22
+#       providerType: redis
+#       ttl: 120 #seconds default is 300 seconds
 
-  httpIdempotencies:
-    - id: idemp_55
-      ttl: 60 # default value is 300 seconds
-      providerType: redis
-      mapHeaderProperties:
-        - "x-http-idempotency"
+#   httpIdempotencies:
+#     - id: idemp_55
+#       ttl: 60 # default value is 300 seconds
+#       providerType: redis
+#       mapHeaderProperties:
+#         - "x-http-idempotency"
 
 contractValidations:
   - id: customer_post_validation

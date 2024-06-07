@@ -19,15 +19,15 @@ namespace App.Handlers.Http
         public void SetNext(Handler next)
             => _next = next;
 
-        public abstract Task DoAsync(StepladderHttpContext context);
+        public abstract Task DoAsync(WrenchHttpContext context);
 
-        protected async Task NextAsync(StepladderHttpContext context)
+        protected async Task NextAsync(WrenchHttpContext context)
         {
             if (_next != null)
                 await _next.DoAsync(context);
         }
 
-        protected async Task LoadHttpResponseMessageAsync(StepladderHttpContext context, HttpResponseMessage response)
+        protected async Task LoadHttpResponseMessageAsync(WrenchHttpContext context, HttpResponseMessage response)
         {
             context.ResponseContext.ResponseBodyStringValue = await response.Content.ReadAsStringAsync();
             context.ResponseContext.ResponseStatusCode = (int)response.StatusCode;

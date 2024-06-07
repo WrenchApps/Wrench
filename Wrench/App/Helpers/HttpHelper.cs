@@ -19,7 +19,7 @@ namespace App.Helpers
         };
 
         public static IDictionary<string, string> LoadMapHeaders(
-            StepladderHttpContext context,
+            WrenchHttpContext context,
             ActionSetting actionSetting)
         {
             var headers = new Dictionary<string, string>();

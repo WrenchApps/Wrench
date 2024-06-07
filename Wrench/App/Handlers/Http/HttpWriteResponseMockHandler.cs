@@ -4,7 +4,7 @@ namespace App.Handlers.Http
 {
     public class HttpWriteResponseMockHandler : Handler
     {
-        public override async Task DoAsync(StepladderHttpContext context)
+        public override async Task DoAsync(WrenchHttpContext context)
         {
             if (context.RouteSetting.ResponseMock != null)
             {

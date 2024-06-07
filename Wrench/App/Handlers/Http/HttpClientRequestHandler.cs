@@ -7,7 +7,7 @@ namespace App.Handlers.Http
 {
     public class HttpClientRequestHandler : Handler
     {
-        public override async Task DoAsync(StepladderHttpContext context)
+        public override async Task DoAsync(WrenchHttpContext context)
         {
             if (context.HasCache == false && context.HasNoErrorProcessor && ActionSetting != null)
             {
@@ -27,7 +27,7 @@ namespace App.Handlers.Http
             await NextAsync(context);
         }
 
-        private string BuildFinalHttpClientUri(StepladderHttpContext context)
+        private string BuildFinalHttpClientUri(WrenchHttpContext context)
         {
             var httpClientUri = ActionSetting.Uri;
             if (ActionSetting.RouteMaps?.Count > 0)
@@ -45,7 +45,7 @@ namespace App.Handlers.Http
             return httpClientUri;
         }
 
-        private string GetRouteValueFromHttpRequest(StepladderHttpContext context, string key)
+        private string GetRouteValueFromHttpRequest(WrenchHttpContext context, string key)
         {
             key = key.Replace("{", "").Replace("}", "");
 
