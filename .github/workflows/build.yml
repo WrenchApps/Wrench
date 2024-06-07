@@ -19,7 +19,7 @@ jobs:
           dotnet-version: '8.0.x'
       
       - name: list dic
-        run: ls /
+        run: ls
      
       - name: Build solution
         run: dotnet build "./App.csproj" -c Debug -o /app/build
